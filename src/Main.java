@@ -17,6 +17,7 @@ public class Main implements Callable<Integer> {
 
     public static void main(String[] args)
     {
+        long start=System.currentTimeMillis();
         int num=100000000;
         int numThreads=100;
         int numbersPThread= num/numThreads;
@@ -25,7 +26,7 @@ public class Main implements Callable<Integer> {
 
         for(int i=0;i<100;i++)
         {
-           
+
             Callable<Integer> task= new Main();
             Future<Integer> future= executorService.submit(task);
             futures.add(future);
@@ -41,6 +42,8 @@ public class Main implements Callable<Integer> {
             }
         }
         executorService.shutdown();
+        long ending=System.currentTimeMillis();
         System.out.println("Total count: "+total);
+        System.out.println("Time: "+(ending-start) +" milliseconds");
     }
 }
